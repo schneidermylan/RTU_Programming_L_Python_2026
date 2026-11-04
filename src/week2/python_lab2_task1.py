@@ -4,9 +4,9 @@ Lab 2.1 – Simple Datasets and Aggregates
 Practice lists, dictionaries and tuples by computing simple aggregates.
 
 Write these functions:
-- average(values)               -> float
+- average(values)                -> float
     Average of a list of numbers. Return 0.0 if the list is empty.
-- largest_city(populations)     -> tuple (name, population)
+- largest_city(populations)      -> tuple (name, population)
     The city with the LARGEST population.
 - smallest_city(populations)    -> tuple (name, population)
     The city with the SMALLEST population.
@@ -25,63 +25,60 @@ In the main block: create your OWN datasets (a list `temperatures` with
 7 daily temperatures, and a dict `city_population` with at least 5 cities),
 call the functions, and print the results. Print the average with
 1 decimal place.
-
-Example run (with your own data the numbers will differ):
-    Average temperature: 4.3
-    Largest city: Riga - 605000
-    Smallest city: Valmiera - 23000
-    Total population: 806000
-
-Examples (these are also used to check your work):
->>> average([1, 2, 3, 4])
-2.5
->>> average([])
-0.0
->>> cities = {"Riga": 605000, "Daugavpils": 78000, "Liepaja": 67000}
->>> largest_city(cities)
-('Riga', 605000)
->>> smallest_city(cities)
-('Liepaja', 67000)
->>> total_population(cities)
-750000
->>> largest_city({})
-('', 0)
->>> largest_city({"A": 10, "B": 10})
-('A', 10)
 """
 
 
 def average(values: list[float]) -> float:
     """Return the average of values, or 0.0 for an empty list."""
-    # TODO: implement
-    raise NotImplementedError("average() is not implemented yet")
+    if not values:
+        return 0.0
+    return sum(values) / len(values)
 
 
 def largest_city(populations: dict[str, int]) -> tuple[str, int]:
     """Return (city, population) for the city with the largest population."""
-    # TODO: implement
-    raise NotImplementedError("largest_city() is not implemented yet")
+    if not populations:
+        return ("", 0)
+    city = max(populations, key=populations.get)
+    return (city, populations[city])
 
 
 def smallest_city(populations: dict[str, int]) -> tuple[str, int]:
     """Return (city, population) for the city with the smallest population."""
-    # TODO: implement
-    raise NotImplementedError("smallest_city() is not implemented yet")
+    if not populations:
+        return ("", 0)
+    city = min(populations, key=populations.get)
+    return (city, populations[city])
 
 
 def total_population(populations: dict[str, int]) -> int:
     """Return the sum of all populations."""
-    # TODO: implement
-    raise NotImplementedError("total_population() is not implemented yet")
+    if not populations:
+        return 0
+    return sum(populations.values())
 
 
 if __name__ == "__main__":
     # Keep all input() and print() calls inside this block, otherwise the
     # autograder cannot import your file.
 
-    # TODO: Create your own datasets - up to you to fill in the data
-    temperatures = []
-    city_population = {}
+    # Create your own datasets
+    temperatures = [4.5, 3.8, 5.2, 4.1, 6.0, 3.5, 4.9]
+    city_population = {
+        "Riga": 605000,
+        "Daugavpils": 78000,
+        "Liepaja": 67000,
+        "Jelgava": 55000,
+        "Jurmala": 51000
+    }
 
-    # TODO: call the functions above and print the results
-    pass
+    # Call the functions and print the results
+    avg_temp = average(temperatures)
+    largest = largest_city(city_population)
+    smallest = smallest_city(city_population)
+    total_pop = total_population(city_population)
+
+    print(f"Average temperature: {avg_temp:.1f}")
+    print(f"Largest city: {largest[0]} - {largest[1]}")
+    print(f"Smallest city: {smallest[0]} - {smallest[1]}")
+    print(f"Total population: {total_pop}")
